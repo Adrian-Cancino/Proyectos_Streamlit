@@ -1,13 +1,19 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import os
+
+# Obtén la ruta absoluta del directorio base
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+casillas_path = os.path.join(BASE_DIR, 'data', 'casillas_limpio.csv')
+elecciones_gob_2021_path = os.path.join(BASE_DIR, 'data', 'votos_gob_2021.csv')
 
 st.title('Resultados gobernador 2021')
 st.write('Este dashboard tiene información sobre las casillas del INE durante'
          'las elecciones del 2021')
 
-data_casillas_2021 = pd.read_csv('./data/casillas_limpio.csv')
-votos_gob = pd.read_csv('./data/votos_gob_2021.csv')
+data_casillas_2021 = pd.read_csv(casillas_path)
+votos_gob = pd.read_csv(elecciones_gob_2021_path)
 data_casillas_2021[['Sección', 'Padrón Electoral', 'Listado Nominal', 'postal_code']] = data_casillas_2021[['Sección', 'Padrón Electoral', 'Listado Nominal', 'postal_code']].astype('object')
 
 # FILTRADO POR DISTRITO FEDERAL
